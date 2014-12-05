@@ -1,5 +1,5 @@
 require 'spec_helper'
-require_relative '../../lib/user'
+require_relative '../../app/models/user'
 require_relative '../../app/helpers/session'
 
 feature "User signs up" do
