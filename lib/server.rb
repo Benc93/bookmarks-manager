@@ -18,6 +18,10 @@ DataMapper.auto_upgrade!
 
 class BookmarkManager < Sinatra::Base
 
+  include Helpers
+  use Rack::Flash
+  use Rack::MethodOverride
+
   configure do 
    register Sinatra::Partial
    set :partial_template_engine, :erb
@@ -25,10 +29,9 @@ class BookmarkManager < Sinatra::Base
 
   enable :sessions
   set :session_secret, 'super secret'
-  use Rack::Flash
-  use Rack::MethodOverride
+  
 
-include Helpers
+
 
   run! if app_file == $0
 

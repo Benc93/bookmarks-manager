@@ -13,4 +13,8 @@ class BookmarkManager
      end
     end
 
+    get '/users/forgot_password' do 
+      'display a form where I can fill in my email'
+    end
+
 end
