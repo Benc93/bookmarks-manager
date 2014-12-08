@@ -27,13 +27,11 @@ class BookmarkManager
     message_params = {:from    => ENV['MAILGUN_POSTMASTER'],
                       :to      => user.email,
                       :subject => 'Forgotten password',
-                      :text    => 'It is really easy to send a message!'}
-
+                      :text    => "Please visit http://localhost:9292/users/reset_password/#{user.password_token}"}
     # Send your message through the client
     mg_client.send_message ENV['MAILGUN_DOMAIN'], message_params
     'Please check your e-mail'
-
-      end
+  end
 
   get '/users/reset_password/:token' do
     @token = params[:token]
