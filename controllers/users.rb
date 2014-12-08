@@ -21,20 +21,19 @@ class BookmarkManager
     user = User.first(email: params[:email])
     user.password_token = (1..64).map{('A'..'Z').to_a.sample}.join
     user.save
+    mg_client = Mailgun::Client.new ENV['MY_MAILGUN_KEY']
 
-    
-    # @email = user.email
-    # @token = user.password_token
-    # mg_client = Mailgun::Client.new ENV['MAILGUN_API_KEY']
-    # message_params = {:from    => ENV['MAILGUN_FROM_ADDRESS'],
-    #                   # :to      => "#{@email}",
-    #                   :to => 'bendavidconway@me.com',
-    #                   :subject => 'Reset Password',
-    #                   :text    => "Please follow the following link to reset your password.\n http://vast-gorge-8099.herokuapp.com/users/reset_password/#{@token}"}
-    # mg_client.send_message 'sandbox9533715787bf49408a576e6f77424cf3.mailgun.org', message_params
-    # flash[:notice] = "Please check your email"
-    # redirect '/'
-  end
+    # Define your message parameters
+    message_params = {:from    => ENV['MAILGUN_POSTMASTER'],
+                      :to      => user.email,
+                      :subject => 'Forgotten password',
+                      :text    => 'It is really easy to send a message!'}
+
+    # Send your message through the client
+    mg_client.send_message ENV['MAILGUN_DOMAIN'], message_params
+    'Please check your e-mail'
+
+      end
 
   get '/users/reset_password/:token' do
     @token = params[:token]

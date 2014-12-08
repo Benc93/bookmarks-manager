@@ -2,6 +2,7 @@ require 'sinatra/base'
 require 'data_mapper'
 require 'rack-flash'
 require 'sinatra/partial'
+require 'mailgun'
 
 env = ENV['RACK_ENV'] || 'development'
 
