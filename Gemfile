@@ -8,6 +8,7 @@ gem 'bcrypt-ruby'
 gem 'rack-flash3'
 gem 'sinatra-partial'
 gem 'mailgun-ruby', '~>1.0.3', require: 'mailgun'
+gem 'pg'
 
 group :development, :test do
   gem 'rspec'
